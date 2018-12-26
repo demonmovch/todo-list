@@ -39,14 +39,15 @@ describe('Инрфаструктурный модуль api:', () => {
         afterAll(() => {
             jest.clearAllMocks();
         });
+        const task = new BaseTaskModel();
 
         test('должен отослать fetch—запрос', () => {
-            api.updateTask();
+            api.updateTask(task);
             expect(fetch).toHaveBeenCalledTimes(1);
         });
 
         test('при ответе API со статусом 200 — должен вернуть данные, предоставленные API', async () => {
-            await expect(api.createTask()).resolves.toEqual([]);
+            await expect(api.updateTask(task)).resolves.toEqual([]);
         });
     });
 
