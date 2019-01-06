@@ -42,7 +42,6 @@
         & input {
             -webkit-appearance: none; /* ← Этот хак нужен сафари для работы (проблема со свойством height)... */
             height: 42px;
-            min-width: 215px;
             padding: 0 14px;
             caret-color: var(--paletteColor3);
             border-radius: 5px;
@@ -51,6 +50,7 @@
             transition: border-color 0.1s ease-in-out;
             background-color: var(--paletteColor2);
             font-size: 20px;
+            text-overflow: ellipsis;
 
             &::placeholder {
                 font-size: 20px;
