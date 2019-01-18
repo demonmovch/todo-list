@@ -35,6 +35,7 @@ export const generateDevelopmentConfiguration = () =>
                 port:               3000,
                 stats:              'errors-only',
                 useLocalIp:         true,
+                clientLogLevel:     'none',
             },
         },
     );

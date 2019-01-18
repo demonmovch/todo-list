@@ -12,7 +12,6 @@ import {
     loadImages,
     setupHtml,
     setupContextReplacement,
-    setupStyledReporting,
     initializeEnvVariables
 } from '../modules';
 
@@ -47,7 +46,6 @@ export const generateCommonConfiguration = () => {
         // Plugins
         setupHtml(),
         setupContextReplacement(),
-        setupStyledReporting(),
         initializeEnvVariables({
             __ENV__:  JSON.stringify(BUILD_ENV),
             __DEV__:  BUILD_ENV === 'development',

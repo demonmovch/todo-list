@@ -6,7 +6,6 @@ import CleanWebpackPlugin from 'clean-webpack-plugin';
 import { DefinePlugin, ContextReplacementPlugin } from 'webpack';
 import { HotModuleReplacementPlugin } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-import StylishReporter from 'webpack-stylish';
 
 export const initializeEnvVariables = (variables) => ({
     plugins: [new DefinePlugin(variables)],
@@ -37,9 +36,4 @@ export const cleanBuildDirectory = () => ({
             allowExternal: true,
         })
     ],
-});
-
-export const setupStyledReporting = () => ({
-    stats:   'none',
-    plugins: [new StylishReporter()],
 });
