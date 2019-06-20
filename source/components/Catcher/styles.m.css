@@ -1,0 +1,14 @@
+.catcher {
+    margin-top: 10px;
+    padding: 12px;
+    border: 1px solid var(--paletteColor2);
+    border-radius: 3px;
+    background-color: var(--paletteColor2);
+    color: var(--paletteColor5);
+    text-align: center;
+
+    & span {
+        color: var(--paletteColor4);
+        font-size: 24px;
+    }
+}

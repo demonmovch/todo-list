@@ -47,8 +47,15 @@
         min-width: 100px;
 
         & .toggleTaskFavoriteState,
-        & .updateTaskMessageOnClick {
+        & .updateTaskMessageOnClick,
+        & .cross {
             margin-right: 20px;
+        }
+
+        & .cross {
+            width: 17px;
+            height: 17px;
+            display: inline-block;
         }
     }
 

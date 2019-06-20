@@ -1,0 +1,14 @@
+import React from 'react';
+
+function PlusIcon(){
+  return (
+        <svg viewBox="0 0 50 50">
+            <path
+                fill="white"
+                d="M25 .038c-1.7 0-3 1.3-3 3v19H3c-1.7 0-3 1.3-3 3s1.3 3 3 3h19v19c0 1.7 1.3 3 3 3s3-1.3 3-3v-19h19c1.7 0 3-1.3 3-3s-1.3-3-3-3H28v-19c0-1.7-1.3-3-3-3z"
+            />
+        </svg>
+  );
+}
+
+export default PlusIcon;
