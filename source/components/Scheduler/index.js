@@ -61,8 +61,25 @@ export class Scheduler extends Component {
 
         return (
             <section className={Styles.scheduler}>
+                <main>
+                    <header>
+                        <h1>Todo List</h1>
+                        <input placeholder='Поиск' type='search' />
+                    </header>
+                    <section>
+                        <form>
+                            <input
+                                maxLength='50'
+                                placeholder='Описaние моей новой задачи'
+                                type='text'
+                            />
+                            <button>Добавить задачу</button>
+                        </form>
+                        <ul>{taskJSX}</ul>
+                    </section>
+                    <footer />
+                </main>
                 <Spinner isSpinning={isTasksFetching} />
-                {taskJSX}
             </section>
         );
     }
