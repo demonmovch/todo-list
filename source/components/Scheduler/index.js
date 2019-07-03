@@ -15,7 +15,13 @@ export class Scheduler extends Component {
         this._fetchTasksAsync();
     }
 
-    _updateTaskAsync = async () => {};
+    _updateTaskAsync = async updatedTask => {
+        this._setTasksFetchingState(true);
+
+        const updatedTasks = await api.updateTask(MAIN_URL, TOKEN, updatedTask);
+
+        this._setTasksFetchingState(false);
+    };
 
     _removeTaskAsync = async () => {};
 
@@ -54,7 +60,11 @@ export class Scheduler extends Component {
         const taskJSX = tasks.map(task => {
             return (
                 <Catcher key={task.id}>
-                    <Task {...task} _removeTaskAsync={this._removeTaskAsync} />
+                    <Task
+                        {...task}
+                        _removeTaskAsync={this._removeTaskAsync}
+                        _updateTaskAsync={this._updateTaskAsync}
+                    />
                 </Catcher>
             );
         });

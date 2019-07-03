@@ -17,4 +17,25 @@ export const api = {
 
         return tasks;
     },
+
+    async updateTask(MAIN_URL, TOKEN, updatedTask) {
+        const response = await fetch(MAIN_URL, {
+            method: 'PUT',
+            headers: {
+                'Content-type': 'application/json',
+                Authorization: TOKEN,
+            },
+            body: JSON.stringify([updatedTask]),
+        });
+
+        const { status } = response;
+
+        if (status !== 200) {
+            return;
+        }
+
+        const { data } = await response.json();
+
+        return data;
+    },
 };
