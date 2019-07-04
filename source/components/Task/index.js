@@ -2,9 +2,10 @@ import React, { PureComponent } from 'react';
 import Styles from './styles.m.css';
 import Star from '../../theme/assets/Star';
 import Edit from '../../theme/assets/Edit';
-import SearchIcon from '../../theme/assets/SearchIcon';
+import Remove from '../../theme/assets/Remove';
 import Checkbox from '../../theme/assets/Checkbox';
 import { string, bool } from 'prop-types';
+import cx from 'classnames';
 
 export class Task extends PureComponent {
     static propTypes = {
@@ -38,14 +39,22 @@ export class Task extends PureComponent {
     };
 
     render() {
-        const { message } = this.props;
+        const { message, completed } = this.props;
+
+        const statusStyle = cx(Styles.task, {
+            [Styles.completed]: completed,
+        });
 
         return (
-            <li className={Styles.task}>
+            <li className={statusStyle}>
                 <div className={Styles.content}>
-                    <div className={Styles.toggleTaskCompletedState}>
-                        <Checkbox onClick={this._toggleTaskCompletedState} />
-                    </div>
+                    <Checkbox
+                        onClick={this._toggleTaskCompletedState}
+                        className={Styles.toggleTaskCompletedState}
+                        inlineBlock={true}
+                        color1='#3B8EF3'
+                        color2='#FFF'
+                    />
                     <input
                         disabled
                         maxLength='50'
@@ -55,15 +64,24 @@ export class Task extends PureComponent {
                     />
                 </div>
                 <div className={Styles.actions}>
-                    <div className={Styles.toggleTaskFavoriteState}>
-                        <Star />
-                    </div>
-                    <div className={Styles.updateTaskMessageOnClick}>
-                        <Edit />
-                    </div>
-                    <div className={Styles.cross}>
-                        <SearchIcon />
-                    </div>
+                    <Star
+                        className={Styles.toggleTaskFavoriteState}
+                        inlineBlock={true}
+                        color1='#3B8EF3'
+                        color2='#000'
+                    />
+                    <Edit
+                        className={Styles.updateTaskMessageOnClick}
+                        inlineBlock={true}
+                        color1='#3B8EF3'
+                        color2='#000'
+                    />
+                    <Remove
+                        className={Styles.cross}
+                        inlineBlock={true}
+                        color1='#3B8EF3'
+                        color2='#000'
+                    />
                 </div>
             </li>
         );

@@ -47,8 +47,7 @@
         min-width: 100px;
 
         & .toggleTaskFavoriteState,
-        & .updateTaskMessageOnClick,
-        & .cross {
+        & .updateTaskMessageOnClick {
             margin-right: 20px;
         }
 

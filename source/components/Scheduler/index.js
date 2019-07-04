@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Styles from './styles.m.css';
 import { Catcher, Spinner, Task } from '../../components';
+import Checkbox from '../../theme/assets/Checkbox';
 import { api, MAIN_URL, TOKEN } from '../../REST'; // ! Импорт модуля API должен иметь именно такой вид (import { api } from '../../REST')
 
 export class Scheduler extends Component {
@@ -18,7 +19,12 @@ export class Scheduler extends Component {
     _updateTaskAsync = async updatedTask => {
         this._setTasksFetchingState(true);
 
-        const updatedTasks = await api.updateTask(MAIN_URL, TOKEN, updatedTask);
+        let updatedTasks = await api.updateTask(MAIN_URL, TOKEN, updatedTask);
+        updatedTasks = updatedTasks[0];
+
+        this.setState(({ tasks }) => ({
+            tasks: tasks.map(task => (task.id === updatedTasks.id ? updatedTasks : task)),
+        }));
 
         this._setTasksFetchingState(false);
     };
@@ -71,6 +77,7 @@ export class Scheduler extends Component {
 
         return (
             <section className={Styles.scheduler}>
+                <Spinner isSpinning={isTasksFetching} />
                 <main>
                     <header>
                         <h1>Todo List</h1>
@@ -87,9 +94,16 @@ export class Scheduler extends Component {
                         </form>
                         <ul>{taskJSX}</ul>
                     </section>
-                    <footer />
+                    <footer>
+                        <Checkbox
+                            onClick={this._toggleTaskCompletedState}
+                            className={Styles.toggleTaskCompletedState}
+                            color1='#363636'
+                            color2='#FFF'
+                        />
+                        <span className={Styles.completeAllTasks}>Все задачи выполнены</span>
+                    </footer>
                 </main>
-                <Spinner isSpinning={isTasksFetching} />
             </section>
         );
     }
