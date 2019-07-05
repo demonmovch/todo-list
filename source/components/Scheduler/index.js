@@ -10,6 +10,7 @@ export class Scheduler extends Component {
         newTaskMessage: '',
         tasksFilter: '',
         tasks: [],
+        allTasksChecked: false,
     };
 
     componentDidMount() {
@@ -29,15 +30,69 @@ export class Scheduler extends Component {
         this._setTasksFetchingState(false);
     };
 
-    _removeTaskAsync = async () => {};
+    _removeTaskAsync = async taskId => {
+        this._setTasksFetchingState(true);
 
-    _createTaskAsync = async () => {};
+        const removedTask = await api.removeTask(MAIN_URL, TOKEN, taskId);
+
+        if (removedTask) {
+            this.setState(({ tasks }) => {
+                const newTasks = tasks.filter(task => task.id !== taskId);
+                return { tasks: [...newTasks] };
+            });
+        }
+
+        this._setTasksFetchingState(false);
+    };
+
+    _createTaskAsync = async event => {
+        event.preventDefault();
+
+        if (this.state.newTaskMessage === '') {
+            return null;
+        }
+
+        this._setTasksFetchingState(true);
+
+        const createdTask = await api.createTask(MAIN_URL, TOKEN, this.state.newTaskMessage);
+
+        this.setState(({ tasks }) => {
+            return { tasks: [...tasks, createdTask], newTaskMessage: '' };
+        });
+
+        this._setTasksFetchingState(false);
+    };
 
     _updateTasksFilter = () => {};
 
-    _updateNewTaskMessage = () => {};
+    _updateNewTaskMessage = event => {
+        this.setState({ newTaskMessage: event.target.value });
+    };
 
-    _completeAllTasksAsync = async () => {};
+    _completeAllTasksAsync = async () => {
+        let notCompletedTasks = this.state.tasks.filter(task => task.completed !== true);
+        if (notCompletedTasks.length === 0) {
+            return null;
+        }
+
+        this._setTasksFetchingState(true);
+
+        notCompletedTasks = notCompletedTasks.map(item => {
+            return { ...item, completed: true };
+        });
+
+        api.completeAllTasks(MAIN_URL, TOKEN, notCompletedTasks);
+
+        this.setState(state => {
+            const tasks = state.tasks.map(item => {
+                return { ...item, completed: true };
+            });
+
+            return { tasks, allTasksChecked: true };
+        });
+
+        this._setTasksFetchingState(false);
+    };
 
     _getAllCompleted = () => {};
 
@@ -52,6 +107,12 @@ export class Scheduler extends Component {
             tasks,
         });
 
+        if (this.state.tasks.some(task => task.completed === false) === false) {
+            this.setState({
+                allTasksChecked: true,
+            });
+        }
+
         this._setTasksFetchingState(false);
     };
 
@@ -62,7 +123,7 @@ export class Scheduler extends Component {
     };
 
     render() {
-        const { tasks, isTasksFetching } = this.state;
+        const { tasks, isTasksFetching, allTasksChecked } = this.state;
         const taskJSX = tasks.map(task => {
             return (
                 <Catcher key={task.id}>
@@ -84,11 +145,13 @@ export class Scheduler extends Component {
                         <input placeholder='Поиск' type='search' />
                     </header>
                     <section>
-                        <form>
+                        <form onSubmit={this._createTaskAsync}>
                             <input
                                 maxLength='50'
                                 placeholder='Описaние моей новой задачи'
                                 type='text'
+                                onChange={this._updateNewTaskMessage}
+                                value={this.state.newTaskMessage}
                             />
                             <button>Добавить задачу</button>
                         </form>
@@ -96,10 +159,12 @@ export class Scheduler extends Component {
                     </section>
                     <footer>
                         <Checkbox
-                            onClick={this._toggleTaskCompletedState}
+                            onClick={this._completeAllTasksAsync}
                             className={Styles.toggleTaskCompletedState}
                             color1='#363636'
                             color2='#FFF'
+                            checked={allTasksChecked}
+                            hover={false}
                         />
                         <span className={Styles.completeAllTasks}>Все задачи выполнены</span>
                     </footer>

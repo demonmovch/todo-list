@@ -38,6 +38,10 @@ export class Task extends PureComponent {
         this.props._updateTaskAsync({ ...task, completed: !task.completed });
     };
 
+    _removeTask = () => {
+        this.props._removeTaskAsync(this.props.id);
+    };
+
     render() {
         const { message, completed } = this.props;
 
@@ -54,6 +58,8 @@ export class Task extends PureComponent {
                         inlineBlock={true}
                         color1='#3B8EF3'
                         color2='#FFF'
+                        checked={completed}
+                        hover={false}
                     />
                     <input
                         disabled
@@ -77,6 +83,7 @@ export class Task extends PureComponent {
                         color2='#000'
                     />
                     <Remove
+                        onClick={this._removeTask}
                         className={Styles.cross}
                         inlineBlock={true}
                         color1='#3B8EF3'
