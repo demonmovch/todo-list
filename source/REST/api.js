@@ -83,14 +83,14 @@ export const api = {
 
         const response = await Promise.all(tasks);
 
-        const data = response.map(async response => {
+        response.map(async response => {
             if (response.status !== 200) {
                 throw new Error();
             }
-            const x = await response.json();
-            //console.log(x);
-            return x;
+
+            /*const x = await response.json();
+
+            return x;*/
         });
-        Promise.all(data).then(data => console.log(data));
     },
 };
