@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Styles from './styles.m.css';
 import { Catcher, Spinner, Task } from '../../components';
 import Checkbox from '../../theme/assets/Checkbox';
+import FlipMove from 'react-flip-move';
 import { api, MAIN_URL, TOKEN } from '../../REST'; // ! Импорт модуля API должен иметь именно такой вид (import { api } from '../../REST')
 
 export class Scheduler extends Component {
@@ -212,7 +213,10 @@ export class Scheduler extends Component {
                             />
                             <button>Добавить задачу</button>
                         </form>
-                        <ul>{taskJSX}</ul>
+
+                        <ul>
+                            <FlipMove>{taskJSX}</FlipMove>
+                        </ul>
                     </section>
                     <footer>
                         <Checkbox
