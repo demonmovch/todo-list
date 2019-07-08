@@ -1,6 +1,1 @@
-export {
-    getDisplayName,
-    sortTasksByDate,
-    sortTasksByGroup,
-    BaseTaskModel
-} from './helpers';
+export { getDisplayName, sortTasksByDate, sortTasksByGroup, BaseTaskModel } from './helpers';

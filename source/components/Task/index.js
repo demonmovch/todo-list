@@ -7,7 +7,7 @@ import Checkbox from '../../theme/assets/Checkbox';
 import { string, bool } from 'prop-types';
 import cx from 'classnames';
 
-export class Task extends PureComponent {
+export default class Task extends PureComponent {
     static propTypes = {
         id: string.isRequired,
         completed: bool.isRequired,

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Catcher, Scheduler } from '../../components';
+import Scheduler from '../../components/Scheduler';
+import Catcher from '../../components/Catcher';
 
 export default class App extends Component {
     render() {

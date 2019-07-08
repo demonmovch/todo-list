@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Styles from './styles.m.css';
-import { Catcher, Spinner, Task } from '../../components';
+import Catcher from '../../components/Catcher';
+import Spinner from '../../components/Spinner';
+import Task from '../../components/Task';
 import Checkbox from '../../theme/assets/Checkbox';
 import FlipMove from 'react-flip-move';
 import { api, MAIN_URL, TOKEN } from '../../REST'; // ! Импорт модуля API должен иметь именно такой вид (import { api } from '../../REST')
 
-export class Scheduler extends Component {
+export default class Scheduler extends Component {
     state = {
         isTasksFetching: false,
         newTaskMessage: '',
