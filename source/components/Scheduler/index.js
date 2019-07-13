@@ -146,7 +146,7 @@ export default class Scheduler extends Component {
 
         const tasks = await api.fetchTasks(MAIN_URL, TOKEN);
 
-        console.log(tasks);
+        //console.log(tasks);
 
         this.setState({
             tasks: this._sortTasks(tasks),
