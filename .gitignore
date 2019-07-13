@@ -1,7 +1,6 @@
 # == Core ==
 
 node_modules/
-build/
 coverage/
 
 *.log
