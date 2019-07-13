@@ -12,7 +12,7 @@ import {
     loadImages,
     setupHtml,
     setupContextReplacement,
-    initializeEnvVariables
+    initializeEnvVariables,
 } from '../modules';
 
 // Instruments
@@ -47,8 +47,8 @@ export const generateCommonConfiguration = () => {
         setupHtml(),
         setupContextReplacement(),
         initializeEnvVariables({
-            __ENV__:  JSON.stringify(BUILD_ENV),
-            __DEV__:  BUILD_ENV === 'development',
+            __ENV__: JSON.stringify(BUILD_ENV),
+            __DEV__: BUILD_ENV === 'development',
             __PROD__: BUILD_ENV === 'production',
         }),
         {
@@ -56,12 +56,12 @@ export const generateCommonConfiguration = () => {
                 source,
             },
             output: {
-                path:       build,
-                publicPath: IS_DEPLOYING_TO_GITHUB_PAGES ? `/${REPOSITORY_NAME}/` : '/',
+                path: build,
+                //publicPath: IS_DEPLOYING_TO_GITHUB_PAGES ? `/${REPOSITORY_NAME}/` : '/',
             },
             resolve: {
                 extensions: ['.mjs', '.js', '.json', '.css', '.m.css', '.png', '.jpg'],
-                modules:    [source, 'node_modules'],
+                modules: [source, 'node_modules'],
             },
             optimization: {
                 nodeEnv: process.env.NODE_ENV,
